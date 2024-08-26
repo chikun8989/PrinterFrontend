@@ -472,8 +472,8 @@ export default function Dashboard() {
     handleMobileMenuClose();
   };
   const handleLogout = () => {
-    // handleMenuClose();
-    navigate('/');
+    localStorage.removeItem('jwtToken'); 
+    navigate('/'); 
   };
   const handlePass = () => {
     // handleMenuClose();

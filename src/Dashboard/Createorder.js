@@ -32,198 +32,7 @@ import { TextField, Button,    FormControl, InputLabel, Select,  Table, TableBod
 // import { styled } from '@mui/material/styles';
 // import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
-// import Typography from '@mui/material/Typography';
-// import img1 from 'E:/react/superprint/my-login-app/src/statics/images/buttons/f1.jpg'
-// const images = [
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-  
-  
-// ];
-const images = [
 
-    {
-      "category": "Clip on Board",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Table Top Standee",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Auto Branding",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Canopy",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "RollUp Standee",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 3",
-          "width": "18%"
-        }
-      ]
-    }
-
-];
 
 // const CreateOrderPage = () => {
 //     const [productName, setProductName] = useState('');
@@ -428,6 +237,8 @@ export default function Dashboard() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -445,8 +256,8 @@ export default function Dashboard() {
     handleMobileMenuClose();
   };
   const handleLogout = () => {
-    // handleMenuClose();
-    navigate('/');
+    localStorage.removeItem('jwtToken'); 
+    navigate('/'); 
   };
   const handlePass = () => {
     // handleMenuClose();

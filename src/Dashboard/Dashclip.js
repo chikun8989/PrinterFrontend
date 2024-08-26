@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { styled, createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -30,198 +30,7 @@ import { mainListItems } from './listItems';
 // import { styled } from '@mui/material/styles';
 // import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
-// import Typography from '@mui/material/Typography';
-// import img1 from 'E:/react/superprint/my-login-app/src/statics/images/buttons/f1.jpg'
-// const images = [
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg',
-//     title: 'Clip on Board',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp',
-//     title: 'Table Top Standee',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
-//     title: 'Auto Branding',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg',
-//     title: 'Canopy',
-//     width: '18%'
-//   },
-//   {
-//     url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU',
-//     title: 'RollUp Standee',
-//     width: '18%'
-//   },
-  
-  
-// ];
-const images = [
 
-    {
-      "category": "Clip on Board",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Table Top Standee",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Auto Branding",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Canopy",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "RollUp Standee",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 3",
-          "width": "18%"
-        }
-      ]
-    }
-
-];
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
@@ -398,7 +207,31 @@ export default function Dashboard() {
   const navigate = useNavigate(); // Import useNavigate here
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/ser/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+console.log(data[0])
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -416,8 +249,8 @@ export default function Dashboard() {
     handleMobileMenuClose();
   };
   const handleLogout = () => {
-    // handleMenuClose();
-    navigate('/');
+    localStorage.removeItem('jwtToken'); 
+    navigate('/'); 
   };
   const handlePass = () => {
     // handleMenuClose();
@@ -457,7 +290,7 @@ export default function Dashboard() {
 
     </Menu>
   );
-
+  const id = localStorage.getItem("id");
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -641,13 +474,13 @@ export default function Dashboard() {
           </Box>
           <Box mt={2}sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%',gap:2 }}>
           {/* {images.map((image) => ( */}
-            {images[2].images.map((img) => (
+            {data[id-1].service_1.map((img) => (
             
             
         <ImageButton onClick={handleDash}
         
           focusRipple
-          key={img.title}
+          key={img.service_name}
           style={{
             width: "18%",
           }}
@@ -669,7 +502,7 @@ export default function Dashboard() {
                 pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
               }}
             >
-              {img.title}
+              {img.service_name}
               <ImageMarked className="MuiImageMarked-root" />
             </Typography>
           </Image>

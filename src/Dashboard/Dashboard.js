@@ -1,6 +1,7 @@
 // import * as React from 'react';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+
 import { styled, createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -28,125 +29,11 @@ import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { mainListItems } from './listItems';
-// import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-// import Box from '@mui/material/Box';
+
 import ButtonBase from '@mui/material/ButtonBase';
-// import Typography from '@mui/material/Typography';
-// import img1 from 'E:/react/superprint/my-login-app/src/statics/images/buttons/f1.jpg'
-// 
-const images = [
 
-    {
-      "category": "Clip on Board",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-          "title": "Clip on Board 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Table Top Standee",
-      
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img-cdn.pixlr.com/image-generator/history/65bb506dcb310754719cf81f/ede935de-1138-4f66-8ed7-44bd16efc709/medium.webp",
-          "title": "Table Top Standee 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Auto Branding",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg",
-          "title": "Auto Branding 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "Canopy",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://wallpapers.com/images/featured/image-pictures-79gc4p3mqu7an848.jpg",
-          "title": "Canopy 3",
-          "width": "18%"
-        }
-      ]
-    },
-    {
-      "category": "RollUp Standee",
-      "url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
-"images": [
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 1",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 2",
-          "width": "18%"
-        },
-        {
-          "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9BsrkGK-wpn_QnUdM7Xxld7QTK7fqRmq8_lvfGHpJQt20xPzDoQSA_u_ykV8O7FSTT60&usqp=CAU",
-          "title": "RollUp Standee 3",
-          "width": "18%"
-        }
-      ]
-    }
 
-];
-
+const url = 'http://127.0.0.1:8000/'
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -275,45 +162,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
+
+
+
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -322,18 +175,31 @@ export default function Dashboard() {
   const navigate = useNavigate(); // Import useNavigate here
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const [services, setServices] = useState([]);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get('http://yourbackendapi.com/services/')
-        .then(response => {
-            setServices(response.data);
-        })
-        .catch(error => {
-            console.error('There was an error fetching the services!', error);
-        });
-}, []);
-
+    fetch('http://127.0.0.1:8000/ser/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+  
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+console.log(setData)
   
 
   const toggleDrawer = () => {
@@ -352,10 +218,13 @@ export default function Dashboard() {
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+   
+  
   const handleLogout = () => {
-    // handleMenuClose();
-    navigate('/');
+    localStorage.removeItem('jwtToken'); 
+    navigate('/'); 
   };
+  
   const handlePass = () => {
     // handleMenuClose();
     navigate('/changep');
@@ -369,6 +238,16 @@ export default function Dashboard() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const handleImageClick = (service) => {
+    if (service.service_1 && service.service_1.length > 0) {
+      // Navigate to the service details page if service_1 exists and has data
+      localStorage.setItem("id", service.id);
+      navigate(`/dashclip`);
+    } else {
+      // Navigate to the create order page if service_1 is empty
+      navigate('/createorder', { state: { serviceId: service.id } });
+    }
   };
 
   const menuId = 'primary-search-account-menu';
@@ -452,11 +331,7 @@ export default function Dashboard() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: '24px', // keep right padding when drawer closed
-            }}
-          >
+          <Toolbar sx={{ pr: '24px' }}>
             <IconButton
               edge="start"
               color="inherit"
@@ -464,7 +339,7 @@ export default function Dashboard() {
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-                ...(open && { display: 'none' }), // Hide button when drawer is open
+                ...(open && { display: 'none' }),
               }}
             >
               <MenuIcon />
@@ -478,15 +353,6 @@ export default function Dashboard() {
             >
               Bajarang Press
             </Typography>
-            {/* <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -494,11 +360,7 @@ export default function Dashboard() {
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton
-                size="large"
-                aria-label="show 17 new notifications"
-                color="inherit"
-              >
+              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
@@ -551,9 +413,7 @@ export default function Dashboard() {
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -561,62 +421,65 @@ export default function Dashboard() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Box display="flex"         
-          justifyContent="center" alignItems="center">
-            
-          <Box mt={2}component="section" height={50} width={420}display="flex"         
-          justifyContent="center" alignItems="center" sx={{  p: 3, borderRadius: 1,
-            bgcolor: 'primary.main',
-            '&:hover': {
-              bgcolor: 'primary.dark',
-            }, }}>          
-          <Typography mt={1}variant="body1"fontSize={20} color={'white'}>
-          OUR SERVICES            
-          </Typography>
-          
-          </Box>
-          </Box>
-          <Box mt={2}sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%',gap:2 }}>
-          {images.map((image) => (
-            
-        <ImageButton onClick={handleDash}
-        
-          focusRipple
-          key={image.category}
-          style={{
-            width: "18%",
-          }}
-        >
-          
-          <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-          
-          
-          <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Image>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              sx={{
-                position: 'relative',
-                p: 4,
-                pt: 2,
-                pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-              }}
-            >
-              {image.category}
-              <ImageMarked className="MuiImageMarked-root" />
-            </Typography>
-          </Image>
-        </ImageButton>
-      ))}
-    </Box>
-            <Copyright sx={{ pt: 4 }} />
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                mt={2}
+                component="section"
+                height={50}
+                width={420}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                sx={{
+                  p: 3,
+                  borderRadius: 1,
+                  bgcolor: 'primary.main',
+                  '&:hover': {
+                    bgcolor: 'primary.dark',
+                  },
+                }}
+              >
+                <Typography mt={1} variant="body1" fontSize={20} color={'white'}>
+                  OUR SERVICES
+                </Typography>
+              </Box>
+            </Box>
+            <Box mt={2} sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%', gap: 2 }}>
+              {data.map((service) => (
+                <ImageButton
+                  onClick={() => handleImageClick(service)}
+                  focusRipple
+                  key={service.service_name}
+                  style={{
+                    width: '18%',
+                  }}
+                >
+                  <ImageSrc style={{ backgroundImage: `url(${url}${service.service_photo})` }} />
+                  <ImageBackdrop className="MuiImageBackdrop-root" />
+                  <Image>
+                    <Typography
+                      component="span"
+                      variant="subtitle1"
+                      color="inherit"
+                      sx={{
+                        position: 'relative',
+                        p: 4,
+                        pt: 2,
+                        pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                      }}
+                    >
+                      {service.service_name}
+                      <ImageMarked className="MuiImageMarked-root" />
+                    </Typography>
+                  </Image>
+                </ImageButton>
+              ))}
+            </Box>
           </Container>
         </Box>
+        {renderMobileMenu}
+        {renderMenu}
       </Box>
-      {renderMobileMenu}
-      {renderMenu}
     </ThemeProvider>
   );
 }

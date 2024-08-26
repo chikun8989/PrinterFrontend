@@ -21,8 +21,14 @@ const Login = () => {
         password: password,
       });
 
-      // On successful login, navigate to dashboard
+      // On successful login, store JWT token and navigate to dashboard
       if (response.status === 200) {
+        localStorage.setItem('contact', contact);
+        const { token } = response.data;
+      
+      // Store JWT token in localStorage
+        localStorage.setItem('jwtToken', token);
+        console.log(response.data)
         navigate('/dashboard');
       }
     } catch (error) {
@@ -60,7 +66,7 @@ const Login = () => {
               required
               fullWidth
               id="contact"
-              label="contact Number"
+              label="Contact Number"
               name="contact"
               autoComplete="contact"
               autoFocus
@@ -111,7 +117,7 @@ const Login = () => {
             <Button variant="outlined">FORGOT PASSWORD</Button>
           </Link>
           <Link href="#" variant="body2">
-            <Button variant="outlined">DON'T HAVE ANY ACCOUNT?</Button>
+            <Button variant="outlined">DON'T HAVE AN ACCOUNT?</Button>
           </Link>
         </Box>
       </Container>
