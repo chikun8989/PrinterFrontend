@@ -296,7 +296,9 @@
 
 
 import * as React from 'react';
-import { useState } from 'react';
+// import { useState } from 'react';
+import  { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -347,41 +349,7 @@ import qr from 'E:/react/superprint/my-login-app/src/statics/images/f5.jpg'
 import { lightGreen } from '@mui/material/colors';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 
-const invoices = [
-  {
-    invoiceNo: '2023/24 - 7263',
-    gstNo: '08AIVPR6257M1Z4',
-    date: '13 Jan 2024',
-    cgst: 443.565,
-    sgst: 443.565,
-    igst: 0,
-    totalTax: 887.13,
-    grandTotal: 5815.6,
-    status: 'Active',
-  },
-  {
-    invoiceNo: '2023/24 - 7204',
-    gstNo: '08AIVPR6257M1Z4',
-    date: '12 Jan 2024',
-    cgst: 57.6,
-    sgst: 57.6,
-    igst: 0,
-    totalTax: 115.2,
-    grandTotal: 755.2,
-    status: 'Active',
-  },
-  {
-    invoiceNo: '2023/24 - 6899',
-    gstNo: '08AIVPR6257M1Z4',
-    date: '29 Dec 2023',
-    cgst: 73.355,
-    sgst: 73.355,
-    igst: 0,
-    totalTax: 146.71,
-    grandTotal: 961.73,
-    status: 'Active',
-  },
-];
+
 
 function Copyright(props) {
   return (
@@ -453,7 +421,31 @@ export default function Dashboard() {
   const [toDate, setToDate] = useState(null);
   const navigate = useNavigate(); // Import useNavigate here
   const isMenuOpen = Boolean(anchorEl);
+  const [orders, setOrders] = useState([]);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  useEffect(() => {
+    // Retrieve the JWT token from localStorage
+    const token = localStorage.getItem('jwtToken');
+  
+    // Ensure token exists before making the request
+    if (token) {
+      axios.get('http://127.0.0.1:8000/order/', {
+        headers: {
+          Authorization: token // Include token in Authorization header
+        }
+      })
+      .then(response => {
+        setOrders(response.data); // Save fetched data
+        // setFilteredorders(response.data); // Initially set filtered data to be all data
+      })
+      .catch(error => {
+        console.error('Error fetching orders:', error);
+      });
+    } else {
+      console.error('No token found');
+    }
+  }, []);
 
   const toggleDrawer = () => {
     setOpen(!open);
@@ -717,22 +709,24 @@ export default function Dashboard() {
               <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>ORDER NO.</TableCell>
               <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>PRINTING PRESS</TableCell>
               <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>DATE</TableCell>
-              <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>CUSTOMER</TableCell>
+              {/* <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>CUSTOMER</TableCell> */}
               <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>AMOUNT</TableCell>
-              <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>PRODUCT / CURRENT STATUS</TableCell>
-              <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>JOB NO</TableCell>
+              {/* <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>PRODUCT / CURRENT STATUS</TableCell> */}
+              {/* <TableCell sx={{ backgroundColor: 'lightblue', color: 'black' }}>JOB NO</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
-          <TableRow>
-              <TableCell>{order.ORDERNO}</TableCell>
-              <TableCell>{order.PRINTINGPRESS}</TableCell>
-              <TableCell>{order.DATE}</TableCell>
-              <TableCell>{order.CUSTOMER}</TableCell>
-              <TableCell>{order.AMOUNT}</TableCell>
-              <TableCell>{order.PRODUCT}</TableCell>
-              <TableCell>{order.JOBNO}</TableCell>
-            </TableRow>
+          {orders.map((order, index) => (
+            <TableRow key={-index}>
+                <TableCell>{order.order_id}</TableCell>
+                <TableCell>{order.client}</TableCell>
+                <TableCell>{order.created}</TableCell>
+                {/* <TableCell>{order.user}</TableCell> */}
+                <TableCell>{order.total_amount}</TableCell>
+                {/* <TableCell>{order.PRODUCT}</TableCell>
+                <TableCell>{order.JOBNO}</TableCell> */}
+              </TableRow>
+          ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -25,10 +25,13 @@ const Login = () => {
       if (response.status === 200) {
         localStorage.setItem('contact', contact);
         const { token } = response.data;
+        const { user } = response.data;
       
       // Store JWT token in localStorage
         localStorage.setItem('jwtToken', token);
+        localStorage.setItem('id', user)
         console.log(response.data)
+        
         navigate('/dashboard');
       }
     } catch (error) {
