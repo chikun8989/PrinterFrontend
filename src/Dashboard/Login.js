@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Box, TextField, Button, Typography, CssBaseline, Link } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -26,10 +26,14 @@ const Login = () => {
         localStorage.setItem('contact', contact);
         const { token } = response.data;
         const { user } = response.data;
+        const { name } = response.data;
+        const { client } = response.data;
       
       // Store JWT token in localStorage
         localStorage.setItem('jwtToken', token);
-        localStorage.setItem('id', user)
+        localStorage.setItem('id', user);
+        localStorage.setItem('name', name);
+        localStorage.setItem('client', client);
         console.log(response.data)
         
         navigate('/dashboard');

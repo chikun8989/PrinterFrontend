@@ -1,5 +1,5 @@
 import * as React from 'react';
-import  { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { styled, createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -26,41 +26,17 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { mainListItems } from './listItems';
 import { TextField, Button,    FormControl, InputLabel, Select,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 // import * as React from 'react';
 // import { styled } from '@mui/material/styles';
 // import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
+import axios from 'axios';
 
 
-// const CreateOrderPage = () => {
-//     const [productName, setProductName] = useState('');
-//     const [quantity, setQuantity] = useState(1);
-//     const [remarks, setRemarks] = useState('');
-  
-//     const handleProductChange = (event) => {
-//       setProductName(event.target.value);
-//     };
-  
-//     const handleQuantityChange = (event) => {
-//       setQuantity(event.target.value);
-//     };
-  
-//     const handleRemarksChange = (event) => {
-//       setRemarks(event.target.value);
-//     };
-  
-//     const handleSubmit = () => {
-//       // handle form submission logic here
-//       console.log('Order Submitted:', { productName, quantity, remarks });
-//     };
-  
-//     const total = 20 * quantity;
-//     const cgst = total * 0.09;
-//     const sgst = total * 0.09;
-//     const netPayable = total + cgst + sgst;
-// }
+
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -236,13 +212,60 @@ export default function Dashboard() {
   const navigate = useNavigate(); // Import useNavigate here
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const location = useLocation();
+  const serviceData = location.state || {};
+  console.log('chikun',serviceData)
+  const name = localStorage.getItem('name')
+  const client = localStorage.getItem('client')
+  console.log('vavargar',serviceData.name)
 
+
+  const handleSubmit = async () => {
+    const token = localStorage.getItem('jwtToken'); // Retrieve the token from local storage
+    
+    // console.log(name)
+    
+    const data = {
+
+      quantity: quantity,
+      price: serviceData.price, // Assuming price is 20 as per your calculation
+      total_amount: netPayable,
+      pic :selectedFile,
+
+      // main_services: productName, // Assuming productName is equivalent to main service
+      // Add other services here if required
+    };
   
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/create/', data, {
+        headers: {
+          Authorization: token,
+          'Content-Type': "multipart/form-data",
+        },
+      });
+  
+      if (response.status === 201) {
+        console.log(response.data.msg); // Success message
+        alert('Order created successfully!');
+      } else {
+        console.log('Something went wrong:', response.data);
+        alert('Failed to create order.');
+      }
+    } catch (error) {
+      console.error('Error creating order:', error.response ? error.response.data : error.message);
+      alert('An error occurred while creating the order.');
+    }
+  };  
 
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [selectedFile, setSelectedFile] = useState(null);
 
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+  
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -283,15 +306,15 @@ export default function Dashboard() {
     setRemarks(event.target.value);
   };
 
-  const handleSubmit = () => {
-    // handle form submission logic here
-    console.log('Order Submitted:', { productName, quantity, remarks });
-  };
+  // const handleSubmit = () => {
+  //   // handle form submission logic here
+  //   console.log('Order Submitted:', { productName, quantity, remarks });
+  // };
 
-  const total = 20 * quantity;
+  const total =  serviceData.price * quantity;
   const cgst = total * 0.09;
   const sgst = total * 0.09;
-  const netPayable = total + cgst + sgst;
+  const netPayable = parseFloat((total + cgst + sgst).toFixed(2));
   
 
   const handleMobileMenuOpen = (event) => {
@@ -495,27 +518,27 @@ export default function Dashboard() {
 
         <Box component={Paper} sx={{ p: 4 }}>
           <TextField
-            label="Name (जिस नाम से ऑर्डर ट्रैक करना चाहते हैं वह नाम यहाँ लिखे)"
+            label="Name "
             variant="outlined"
             fullWidth
+            value={name}
             margin="normal"
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+          <TextField
+            label="Service "
+            variant="outlined"
+            fullWidth
+            value={serviceData.name}
+            margin="normal"
+            nputProps={{
+              readOnly: true,
+            }}
           />
           
-          <FormControl fullWidth margin="normal">
-            <InputLabel>Choose Product</InputLabel>
-            <Select value={productName} onChange={handleProductChange}>
-              <MenuItem value="CLIP ON BOARD CUSTOMIZED SIZE QUERY ">
-                CLIP ON BOARD CUSTOMIZED SIZE QUERY 
-              </MenuItem>
-              <MenuItem value="TABLE STANDEE">
-              TABLE STANDEE
-              </MenuItem>
-              <MenuItem value="CANOPY">
-              CANOPY
-              </MenuItem>
-              {/* Add more product options here */}
-            </Select>
-          </FormControl>
+         
 
           <TextField
             label="Quantity"
@@ -525,10 +548,11 @@ export default function Dashboard() {
             margin="normal"
             value={quantity}
             onChange={handleQuantityChange}
+            inputProps={{ min: 1 }}
           />
           <Box mt={1} mb={2}>
             Upload attachment <br />
-             <input type="file"   />
+             <input type="file" onChange={handleFileChange} />
             </Box>
           <TableContainer component={Paper}>
             <Table>

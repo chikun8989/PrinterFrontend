@@ -26,11 +26,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItemButton>
-    <ListItemButton component={RouterLink} to="/addmoney">
+    <ListItemButton component={RouterLink} to="/inv">
       <ListItemIcon>
         <CurrencyRupeeIcon />
       </ListItemIcon>
-      <ListItemText primary="AddMoney" />
+      <ListItemText primary="Inv" />
     </ListItemButton>
     <ListItemButton component={RouterLink} to="/addmoney">
       <ListItemIcon>

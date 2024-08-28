@@ -31,7 +31,7 @@ import { mainListItems } from './listItems';
 // import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 
-
+const url = 'http://127.0.0.1:8000/'
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -260,7 +260,22 @@ console.log(data[0])
     // handleMenuClose();
     navigate('/createorder');
   };
+  const handleImageClick = (img) => {
+    if (img.service_2 && img.service_2.length > 0) {
+      // Navigate to the service details page if service_1 exists and has data
+      localStorage.setItem("id", img.id);
+      navigate(`/dash`);
+    } else {
+      const data ={
+        id: img.id,
+        name :img.service_name,
+        price:img.price
 
+    }
+      // Navigate to the create order page if service_1 is empty
+      navigate('/createorder', { state: data });
+    }
+  };
   
 
   const handleMobileMenuOpen = (event) => {
@@ -477,7 +492,8 @@ console.log(data[0])
             {data[id-1].service_1.map((img) => (
             
             
-        <ImageButton onClick={handleDash}
+        <ImageButton 
+          onClick={() => handleImageClick(img)}
         
           focusRipple
           key={img.service_name}
@@ -486,7 +502,7 @@ console.log(data[0])
           }}
         >
           
-          <ImageSrc style={{ backgroundImage: `url(${img.url})` }} />
+          <ImageSrc style={{ backgroundImage: `url(${url}${img.service_photo})` }} />
           
           
           <ImageBackdrop className="MuiImageBackdrop-root" />

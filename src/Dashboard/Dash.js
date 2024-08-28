@@ -1,7 +1,4 @@
-// import * as React from 'react';
 import React, { useEffect, useState } from 'react';
-// import axios from 'axios';
-
 import { styled, createTheme, ThemeProvider, alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -29,9 +26,10 @@ import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { mainListItems } from './listItems';
-
+// import * as React from 'react';
+// import { styled } from '@mui/material/styles';
+// import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
-
 
 const url = 'http://127.0.0.1:8000/'
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
@@ -162,11 +160,45 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.common.white, 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(3),
+    width: 'auto',
+  },
+}));
 
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
 
-
-
-
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '20ch',
+    },
+  },
+}));
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -180,15 +212,7 @@ export default function Dashboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken'); // Retrieve the JWT token from localStorage
-
-    fetch('http://127.0.0.1:8000/ser/', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': token, // Include the token in the Authorization header
-      },
-    })
+    fetch('http://127.0.0.1:8000/ser/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -204,12 +228,10 @@ export default function Dashboard() {
         setLoading(false);
       });
   }, []);
-
+  
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-console.log(data)
-  
-
+console.log(data[0])
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -226,42 +248,38 @@ console.log(data)
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-   
-  
   const handleLogout = () => {
     localStorage.removeItem('jwtToken'); 
     navigate('/'); 
   };
-  
   const handlePass = () => {
     // handleMenuClose();
     navigate('/changep');
   };
   const handleDash = () => {
     // handleMenuClose();
-    navigate('/dashclip');
+    navigate('/createorder');
   };
+  const handleImageClick = (img) => {
+    if (img.service_3 && img.service_3.length > 0) {
+      // Navigate to the service details page if service_1 exists and has data
+      localStorage.setItem("id", img.id);
+      navigate(`/dashlast`);
+    } else {
+        const data ={
+            id: img.id,
+            name :img.service_name,
+            price:img.price
 
+        }
+      // Navigate to the create order page if service_1 is empty
+      navigate('/createorder', { state: data });
+    }
+  };
   
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
-  const handleImageClick = (service) => {
-    if (service.service_1 && service.service_1.length > 0) {
-      // Navigate to the service details page if service_1 exists and has data
-      localStorage.setItem("id", service.id);
-      navigate(`/dashclip`);
-    } else {
-      const data ={
-        id: service.id,
-        name :service.service_name,
-        price:service.price
-
-    }
-      // Navigate to the create order page if service_1 is empty
-      navigate('/createorder', { state: data });
-    }
   };
 
   const menuId = 'primary-search-account-menu';
@@ -287,7 +305,7 @@ console.log(data)
 
     </Menu>
   );
-
+  const id = localStorage.getItem("id");
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
     <Menu
@@ -345,7 +363,11 @@ console.log(data)
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-          <Toolbar sx={{ pr: '24px' }}>
+          <Toolbar
+            sx={{
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
             <IconButton
               edge="start"
               color="inherit"
@@ -353,7 +375,7 @@ console.log(data)
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-                ...(open && { display: 'none' }),
+                ...(open && { display: 'none' }), // Hide button when drawer is open
               }}
             >
               <MenuIcon />
@@ -367,6 +389,15 @@ console.log(data)
             >
               Bajarang Press
             </Typography>
+            {/* <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search> */}
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -374,7 +405,11 @@ console.log(data)
                   <MailIcon />
                 </Badge>
               </IconButton>
-              <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+              <IconButton
+                size="large"
+                aria-label="show 17 new notifications"
+                color="inherit"
+              >
                 <Badge badgeContent={17} color="error">
                   <NotificationsIcon />
                 </Badge>
@@ -427,7 +462,9 @@ console.log(data)
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -435,65 +472,66 @@ console.log(data)
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <Box
-                mt={2}
-                component="section"
-                height={50}
-                width={420}
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                sx={{
-                  p: 3,
-                  borderRadius: 1,
-                  bgcolor: 'primary.main',
-                  '&:hover': {
-                    bgcolor: 'primary.dark',
-                  },
-                }}
-              >
-                <Typography mt={1} variant="body1" fontSize={20} color={'white'}>
-                  OUR SERVICES
-                </Typography>
-              </Box>
-            </Box>
-            <Box mt={2} sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%', gap: 2 }}>
-              {data.map((service) => (
-                <ImageButton
-                  onClick={() => handleImageClick(service)}
-                  focusRipple
-                  key={service.service_name}
-                  style={{
-                    width: '18%',
-                  }}
-                >
-                  <ImageSrc style={{ backgroundImage: `url(${url}${service.service_photo})` }} />
-                  <ImageBackdrop className="MuiImageBackdrop-root" />
-                  <Image>
-                    <Typography
-                      component="span"
-                      variant="subtitle1"
-                      color="inherit"
-                      sx={{
-                        position: 'relative',
-                        p: 4,
-                        pt: 2,
-                        pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                      }}
-                    >
-                      {service.service_name}
-                      <ImageMarked className="MuiImageMarked-root" />
-                    </Typography>
-                  </Image>
-                </ImageButton>
-              ))}
-            </Box>
+            <Box display="flex"         
+          justifyContent="center" alignItems="center">
+            
+          <Box mt={2}component="section" height={50} width={420}display="flex"         
+          justifyContent="center" alignItems="center" sx={{  p: 3, borderRadius: 1,
+            bgcolor: 'primary.main',
+            '&:hover': {
+              bgcolor: 'primary.dark',
+            }, }}>          
+          <Typography mt={1}variant="body1"fontSize={20} color={'white'}>
+          OUR SERVICES            
+          </Typography>
+          
+          </Box>
+          </Box>
+          <Box mt={2}sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%',gap:2 }}>
+          {/* {images.map((image) => ( */}
+            {data[id-1].service_1[id-1].service_2.map((img) => (
+            
+            
+        <ImageButton 
+        onClick={() => handleImageClick(img)}
+        
+          focusRipple
+          key={img.service_name}
+          style={{
+            width: "18%",
+          }}
+        >
+          
+          <ImageSrc style={{ backgroundImage: `url(${url}${img.service_photo})` }} />
+          
+          
+          <ImageBackdrop className="MuiImageBackdrop-root" />
+          <Image>
+            <Typography
+              component="span"
+              variant="subtitle1"
+              color="inherit"
+              sx={{
+                position: 'relative',
+                p: 4,
+                pt: 2,
+                pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+              }}
+            >
+              {img.service_name}
+              <ImageMarked className="MuiImageMarked-root" />
+            </Typography>
+          </Image>
+        </ImageButton>
+            ))}
+      
+    </Box>
+            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
-        {renderMobileMenu}
-        {renderMenu}
       </Box>
+      {renderMobileMenu}
+      {renderMenu}
     </ThemeProvider>
   );
 }
