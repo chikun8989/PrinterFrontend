@@ -270,7 +270,7 @@ console.log(data[0])
         id: img.id,
         name :img.service_name,
         price:img.price
-
+        
     }
       // Navigate to the create order page if service_1 is empty
       navigate('/createorder', { state: data });

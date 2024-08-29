@@ -30,7 +30,7 @@ function App() {
         <Route path="/term" element={<Term />} />
         <Route path="/changep" element={<Changp />} />
         <Route path="/createorder" element={<Createorder />} />
-        <Route path="/inv" element={<Inv />} />
+        <Route path="/inv/:invoiceNo" element={<Inv />} />
         <Route path="/dashclip" element={<Dashclip />} />
         <Route path="/dash" element={<Dash />} />
         <Route path="/dashlast" element={<Dashlast />} />

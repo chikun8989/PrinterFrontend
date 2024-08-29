@@ -231,6 +231,7 @@ export default function Dashboard() {
       price: serviceData.price, // Assuming price is 20 as per your calculation
       total_amount: netPayable,
       pic :selectedFile,
+      p_name : serviceData.name
 
       // main_services: productName, // Assuming productName is equivalent to main service
       // Add other services here if required
