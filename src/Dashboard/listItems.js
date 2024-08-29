@@ -78,28 +78,3 @@ export const mainListItems = (
   </React.Fragment>
 );
 
-// export const secondaryListItems = (
-//   <React.Fragment>
-//     <ListSubheader component="div" inset>
-//       Saved reports
-//     </ListSubheader>
-//     <ListItemButton component={RouterLink} to="/addmoney">
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Current month" />
-//     </ListItemButton>
-//     <ListItemButton component={RouterLink} to="/addmoney">
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Last quarter" />
-//     </ListItemButton>
-//     <ListItemButton component={RouterLink} to="/addmoney">
-//       <ListItemIcon>
-//         <AssignmentIcon />
-//       </ListItemIcon>
-//       <ListItemText primary="Year-end sale" />
-//     </ListItemButton>
-//   </React.Fragment>
-// );
