@@ -26,7 +26,7 @@ import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@mui/icons-material/Search';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { mainListItems } from './listItems';
-import img  from 'E:/react/superprint/my-login-app/src/statics/images/f5.jpg'
+import img  from '../statics/images/buttons/f5.jpg'
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';

@@ -105,7 +105,7 @@ export default function Dashboard() {
       const token = localStorage.getItem('jwtToken');
       
       // Make POST request to Django backend API
-      const response = await axios.put('http://127.0.0.1:8000/reset/', {
+      const response = await axios.put('https://gssprintinghub.in/reset/', {
         current_password: currentPassword,
         new_password: newPassword,
         // contact :contact,

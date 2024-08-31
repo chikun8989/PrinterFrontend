@@ -31,7 +31,7 @@ import { mainListItems } from './listItems';
 // import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 
-const url = 'http://127.0.0.1:8000/'
+const url = 'https://gssprintinghub.in/'
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -212,7 +212,7 @@ export default function Dashboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/ser/')
+    fetch('https://gssprintinghub.in/ser/')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

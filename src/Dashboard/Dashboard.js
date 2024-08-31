@@ -33,7 +33,7 @@ import { mainListItems } from './listItems';
 import ButtonBase from '@mui/material/ButtonBase';
 
 
-const url = 'http://127.0.0.1:8000/'
+const url = 'https://gssprintinghub.in/'
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 200,
@@ -182,7 +182,7 @@ export default function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken'); // Retrieve the JWT token from localStorage
 
-    fetch('http://127.0.0.1:8000/ser/', {
+    fetch('https://gssprintinghub.in/ser/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

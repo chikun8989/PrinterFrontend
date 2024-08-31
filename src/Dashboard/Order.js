@@ -132,7 +132,7 @@ export default function Dashboard() {
   
     // Ensure token exists before making the request
     if (token) {
-      axios.get('http://127.0.0.1:8000/order/', {
+      axios.get('https://gssprintinghub.in/order/', {
         headers: {
           Authorization: token // Include token in Authorization header
         }

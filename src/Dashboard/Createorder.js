@@ -238,7 +238,7 @@ export default function Dashboard() {
     };
   
     try {
-      const response = await axios.post('http://127.0.0.1:8000/create/', data, {
+      const response = await axios.post('https://gssprintinghub.in/create/', data, {
         headers: {
           Authorization: token,
           'Content-Type': "multipart/form-data",

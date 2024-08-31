@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Async action to fetch services
 export const fetchServices = createAsyncThunk('services/fetchServices', async () => {
-  const response = await axios.get('http://127.0.0.1:8000/ser/');
+  const response = await axios.get('https://gssprintinghub.in/ser/');
   return response.data;
 });
 // console.log(response.data)

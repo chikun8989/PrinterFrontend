@@ -135,7 +135,7 @@ export default function Dashboard() {
   
     // Ensure token exists before making the request
     if (token) {
-      axios.get('http://127.0.0.1:8000/trns/', {
+      axios.get('https://gssprintinghub.in/trns/', {
         headers: {
           Authorization: token // Include token in Authorization header
         }

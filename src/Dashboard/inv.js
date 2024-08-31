@@ -25,7 +25,7 @@ const InvoicePage = () => {
   useEffect(() => {
     const token = localStorage.getItem('jwtToken');
 
-    fetch(`http://127.0.0.1:8000/invoic/${invoiceNo}/`, {
+    fetch(`https://gssprintinghub.in/invoic/${invoiceNo}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
